@@ -1,7 +1,7 @@
 import 'package:table_order/services/models/help.dart';
 
 class HelpRepo {
-  Future<List<Help>> fetchGroups(int merchantId, int branchId) async {
+  Future<List<Help>> fetchHelps(int merchantId, int branchId) async {
     return Future(() {
       return [
         Help(id: 1, title: "물"),

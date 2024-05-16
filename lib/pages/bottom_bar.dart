@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:table_order/pages/help_page.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -14,7 +16,7 @@ class BottomBar extends StatelessWidget {
             flex: 6,
             child: Center(),
           ),
-          Expanded(flex: 2, child: buildHelpButton()),
+          Expanded(flex: 2, child: buildHelpButton(context)),
           Container(
             width: 10,
           ),
@@ -39,39 +41,57 @@ class BottomBar extends StatelessWidget {
     );
   }
 
-  Widget buildHelpButton() {
-    return Container(
-      padding: EdgeInsets.all(5),
-      height: double.infinity,
-      color: Colors.indigo.shade400,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.person_add, color: Colors.black),
-          Container(
-            width: 10,
+  Widget buildHelpButton(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            opaque: false, // 배경을 투명하게 설정
+            pageBuilder: (BuildContext context, _, __) {
+              return HelpPage();
+            },
           ),
-          Text("직원호출", style: TextStyle(fontSize: 20, color: Colors.black)),
-        ],
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.all(5),
+        height: double.infinity,
+        color: Colors.indigo.shade400,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.person_add, color: Colors.black),
+            Container(
+              width: 10,
+            ),
+            Text("직원호출", style: TextStyle(fontSize: 20, color: Colors.black)),
+          ],
+        ),
       ),
     );
     // 버튼 클릭 시 수행할 동작을 여기에 작성합니다.
   }
 
   Widget buildOrderListButton() {
-    return Container(
-      padding: EdgeInsets.all(5),
-      height: double.infinity,
-      color: Colors.green.shade300,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.list_alt_rounded, color: Colors.black),
-          Container(
-            width: 10,
-          ),
-          Text("주문내역", style: TextStyle(fontSize: 20, color: Colors.black)),
-        ],
+    return GestureDetector(
+      onTap: () {
+        //
+      },
+      child: Container(
+        padding: EdgeInsets.all(5),
+        height: double.infinity,
+        color: Colors.green.shade300,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.list_alt_rounded, color: Colors.black),
+            Container(
+              width: 10,
+            ),
+            Text("주문내역", style: TextStyle(fontSize: 20, color: Colors.black)),
+          ],
+        ),
       ),
     );
     // 버튼 클릭 시 수행할 동작을 여기에 작성합니다.
