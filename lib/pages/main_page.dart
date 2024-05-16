@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_order/pages/menu_group.dart';
+import 'package:table_order/pages/menu_list.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -25,12 +26,7 @@ class MainPage extends StatelessWidget {
           Expanded(flex: 2, child: MenuGroup()),
           Expanded(
             flex: 8,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('베스트'),
-              ],
-            ),
+            child: MenuList(),
           ),
         ],
       ),

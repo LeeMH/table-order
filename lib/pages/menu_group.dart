@@ -41,6 +41,7 @@ class MenuGroup extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 20),
           decoration: BoxDecoration(
+            color: selected ? Colors.white : null,
             border: selected
                 ? Border.all(
                     color: const Color.fromRGBO(239, 83, 80, 1), // 외곽선 색상

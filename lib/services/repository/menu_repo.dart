@@ -67,6 +67,161 @@ class MenuRepo {
           groups: [3],
           badges: [],
         ),
+        Menu(
+          id: 6,
+          title: "양상추 샐러드",
+          price: 9000,
+          image:
+              "https://as2.ftcdn.net/v2/jpg/04/56/12/45/1000_F_456124577_VpxxoqzHT9Xeao0NqwKZ4smrR5IR0byS.jpg",
+          detailImages: [
+            "https://as2.ftcdn.net/v2/jpg/04/56/12/45/1000_F_456124577_VpxxoqzHT9Xeao0NqwKZ4smrR5IR0byS.jpg",
+          ],
+          groups: [4, 1],
+          badges: [],
+        ),
+        Menu(
+          id: 7,
+          title: "구운버섯 샐러드",
+          price: 9900,
+          image:
+              "https://as2.ftcdn.net/v2/jpg/04/53/82/45/1000_F_453824582_jBJW586ONoFG2qGrHexViIVccOIbnNeO.jpg",
+          detailImages: [
+            "https://as2.ftcdn.net/v2/jpg/04/53/82/45/1000_F_453824582_jBJW586ONoFG2qGrHexViIVccOIbnNeO.jpg",
+          ],
+          groups: [4, 1],
+          badges: [],
+        ),
+        Menu(
+          id: 8,
+          title: "닭가슴살 샐러드",
+          price: 9900,
+          image:
+              "https://as1.ftcdn.net/v2/jpg/04/78/02/40/1000_F_478024052_1vSyf9TmIGozfdhtSW2jPA1vVc2CIYfx.jpg",
+          detailImages: [
+            "https://as1.ftcdn.net/v2/jpg/04/78/02/40/1000_F_478024052_1vSyf9TmIGozfdhtSW2jPA1vVc2CIYfx.jpg",
+          ],
+          groups: [4],
+          badges: [],
+        ),
+        Menu(
+          id: 8,
+          title: "닭가슴살 샐러드",
+          price: 9900,
+          image:
+              "https://as1.ftcdn.net/v2/jpg/04/78/02/40/1000_F_478024052_1vSyf9TmIGozfdhtSW2jPA1vVc2CIYfx.jpg",
+          detailImages: [
+            "https://as1.ftcdn.net/v2/jpg/04/78/02/40/1000_F_478024052_1vSyf9TmIGozfdhtSW2jPA1vVc2CIYfx.jpg",
+          ],
+          groups: [4],
+          badges: [],
+        ),
+        Menu(
+          id: 9,
+          title: "복숭아 샐러드",
+          price: 9900,
+          image:
+              "https://as1.ftcdn.net/v2/jpg/06/32/78/34/1000_F_632783459_Y9n9rB4dcgSSExAEQbK3AUoLE0pPVzWh.jpg",
+          detailImages: [
+            "https://as1.ftcdn.net/v2/jpg/06/32/78/34/1000_F_632783459_Y9n9rB4dcgSSExAEQbK3AUoLE0pPVzWh.jpg",
+          ],
+          groups: [4],
+          badges: [],
+        ),
+        Menu(
+          id: 10,
+          title: "키위,수박 주스",
+          price: 6500,
+          image:
+              "https://as2.ftcdn.net/v2/jpg/06/36/15/83/1000_F_636158356_hat2tFUbREbZpcJv5tDJDdlVdSaMDzN4.jpg",
+          detailImages: [
+            "https://as2.ftcdn.net/v2/jpg/06/36/15/83/1000_F_636158356_hat2tFUbREbZpcJv5tDJDdlVdSaMDzN4.jpg",
+          ],
+          groups: [6, 1],
+          badges: [],
+        ),
+        Menu(
+          id: 11,
+          title: "모히또",
+          price: 6500,
+          image:
+              "https://as2.ftcdn.net/v2/jpg/03/95/55/13/1000_F_395551392_pGrzghqiaJjTNBawtzQ7UUtR1lgUp9ZV.jpg",
+          detailImages: [
+            "https://as2.ftcdn.net/v2/jpg/03/95/55/13/1000_F_395551392_pGrzghqiaJjTNBawtzQ7UUtR1lgUp9ZV.jpg",
+          ],
+          groups: [6, 1],
+          badges: [],
+        ),
+        Menu(
+          id: 12,
+          title: "콜라",
+          price: 3000,
+          image:
+              "https://img.danawa.com/prod_img/500000/763/904/img/904763_1.jpg?_v=20200616095718",
+          detailImages: [
+            "https://img.danawa.com/prod_img/500000/763/904/img/904763_1.jpg?_v=20200616095718",
+          ],
+          groups: [6],
+          badges: [],
+        ),
+        Menu(
+          id: 13,
+          title: "사이다",
+          price: 3000,
+          image: "http://www.sisacast.kr/news/photo/202001/31100_23529_419.jpg",
+          detailImages: [
+            "http://www.sisacast.kr/news/photo/202001/31100_23529_419.jpg",
+          ],
+          groups: [6],
+          badges: [],
+        ),
+        Menu(
+          id: 14,
+          title: "맥주",
+          price: 5000,
+          image:
+              "https://images.emarteveryday.co.kr/images/app/webapps/evd_web2/share/SKU/mall/24/10/8801858011024_1.png",
+          detailImages: [
+            "https://images.emarteveryday.co.kr/images/app/webapps/evd_web2/share/SKU/mall/24/10/8801858011024_1.png",
+          ],
+          groups: [6],
+          badges: [],
+        ),
+        Menu(
+          id: 15,
+          title: "치즈스틱",
+          price: 4000,
+          image:
+              "https://as2.ftcdn.net/v2/jpg/05/79/64/57/1000_F_579645795_yp7uX8yYYPvTvfSyGxwAXz5NYYfwJSDG.jpg",
+          detailImages: [
+            "https://as2.ftcdn.net/v2/jpg/05/79/64/57/1000_F_579645795_yp7uX8yYYPvTvfSyGxwAXz5NYYfwJSDG.jpg",
+          ],
+          groups: [5],
+          badges: [],
+        ),
+        Menu(
+          id: 16,
+          title: "떡볶이",
+          price: 4500,
+          image:
+              "https://as1.ftcdn.net/v2/jpg/04/63/65/98/1000_F_463659844_lwREXov1yPCOhappvbETB2H8Dm4YfLue.jpg",
+          detailImages: [
+            "https://as1.ftcdn.net/v2/jpg/04/63/65/98/1000_F_463659844_lwREXov1yPCOhappvbETB2H8Dm4YfLue.jpg",
+          ],
+          groups: [5],
+          badges: [],
+        ),
+        Menu(
+          id: 16,
+          title: "버팔로 윙",
+          price: 6000,
+          image:
+              "https://as1.ftcdn.net/v2/jpg/04/86/62/74/1000_F_486627491_WwpK6CVUywxN8WfhXXddNr9ROTVQnDJS.jpg",
+          detailImages: [
+            "https://as1.ftcdn.net/v2/jpg/04/86/62/74/1000_F_486627491_WwpK6CVUywxN8WfhXXddNr9ROTVQnDJS.jpg",
+          ],
+          groups: [5],
+          badges: [],
+        ),
       ];
     });
   }
