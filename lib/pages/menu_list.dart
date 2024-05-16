@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:table_order/services/models/menu.dart';
 import 'package:table_order/services/states/group_state.dart';
 import 'package:table_order/services/states/menu_state.dart';
+import 'package:table_order/util.dart';
 
 class MenuList extends StatelessWidget {
   const MenuList({super.key});
@@ -57,7 +58,8 @@ class MenuList extends StatelessWidget {
                     menu.title,
                     style: TextStyle(fontSize: 20),
                   )),
-              Expanded(flex: 1, child: Text(menu.price.toString())),
+              Expanded(
+                  flex: 1, child: Text(Util.formatNumber(menu.price.toInt()))),
             ],
           ),
         ),

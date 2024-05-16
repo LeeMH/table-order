@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:table_order/services/models/option_item.dart';
 
 part 'option.g.dart';
 
@@ -8,14 +9,14 @@ class Option {
   final String title;
   final bool fixedCount;
   final int maxCount;
-  final double price;
+  final List<OptionItem> items;
 
   Option({
     required this.id,
     required this.title,
     required this.fixedCount,
     required this.maxCount,
-    required this.price,
+    required this.items,
   });
 
   factory Option.fromJson(Map<String, dynamic> json) => _$OptionFromJson(json);

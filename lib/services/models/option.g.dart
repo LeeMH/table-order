@@ -11,7 +11,9 @@ Option _$OptionFromJson(Map<String, dynamic> json) => Option(
       title: json['title'] as String,
       fixedCount: json['fixedCount'] as bool,
       maxCount: (json['maxCount'] as num).toInt(),
-      price: (json['price'] as num).toDouble(),
+      items: (json['items'] as List<dynamic>)
+          .map((e) => OptionItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$OptionToJson(Option instance) => <String, dynamic>{
@@ -19,5 +21,5 @@ Map<String, dynamic> _$OptionToJson(Option instance) => <String, dynamic>{
       'title': instance.title,
       'fixedCount': instance.fixedCount,
       'maxCount': instance.maxCount,
-      'price': instance.price,
+      'items': instance.items,
     };
