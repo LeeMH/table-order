@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:table_order/pages/bottom_bar.dart';
 import 'package:table_order/pages/menu_group.dart';
 import 'package:table_order/pages/menu_list.dart';
 
@@ -30,38 +31,7 @@ class MainPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.red,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.home),
-              onPressed: () {
-                // Home 버튼 눌렸을 때의 동작
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                // Search 버튼 눌렸을 때의 동작
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.favorite),
-              onPressed: () {
-                // Favorite 버튼 눌렸을 때의 동작
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () {
-                // Settings 버튼 눌렸을 때의 동작
-              },
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
