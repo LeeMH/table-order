@@ -11,13 +11,13 @@ class MenuList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var menu = ItemController.to
+      var items = ItemController.to
           .getItemsBySelectedGroupId(GroupController.to.getSelectedGroupId());
 
       return Container(
         color: Colors.white70,
         child: GridView.builder(
-          itemCount: menu.length, // 총 목록의 수
+          itemCount: items.length, // 총 목록의 수
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3, // 행에 표시될 위젯 수
             crossAxisSpacing: 10.0, // 가로 간격
@@ -25,7 +25,7 @@ class MenuList extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             // 각 목록 아이템 생성
-            return buildMenu(menu[index]);
+            return buildMenu(items[index]);
           },
         ),
       );

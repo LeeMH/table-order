@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:table_order/pages/help_page.dart';
 
 class BottomBar extends StatelessWidget {
@@ -16,28 +15,13 @@ class BottomBar extends StatelessWidget {
             flex: 6,
             child: Center(),
           ),
-          Expanded(flex: 2, child: buildHelpButton(context)),
+          Expanded(flex: 2, child: buildHelpButton(context)), // 직원호출 버튼
           Container(
             width: 10,
           ),
-          Expanded(flex: 2, child: buildOrderListButton()),
-          //buildButton("주문내역", Icons.list_alt, Color.fromRGBO(220, 231, 117, 1))
+          Expanded(flex: 2, child: buildOrderListButton()), // 주문내역 버튼
         ],
       ),
-    );
-  }
-
-  ElevatedButton buildButton(
-      String buttonText, IconData buttonIcon, Color buttonColor) {
-    return ElevatedButton.icon(
-      icon: Icon(buttonIcon, color: Colors.black),
-      label: Text(buttonText, style: TextStyle(color: Colors.black)),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: buttonColor, // 버튼의 배경색
-      ),
-      onPressed: () {
-        // 버튼 클릭 시 수행할 동작을 여기에 작성합니다.
-      },
     );
   }
 
@@ -61,11 +45,11 @@ class BottomBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.person_add, color: Colors.black),
+            Icon(Icons.person_add, color: Colors.white),
             Container(
               width: 10,
             ),
-            Text("직원호출", style: TextStyle(fontSize: 20, color: Colors.black)),
+            Text("직원호출", style: TextStyle(fontSize: 20, color: Colors.white)),
           ],
         ),
       ),
@@ -85,11 +69,11 @@ class BottomBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.list_alt_rounded, color: Colors.black),
+            Icon(Icons.list_alt_rounded, color: Colors.white),
             Container(
               width: 10,
             ),
-            Text("주문내역", style: TextStyle(fontSize: 20, color: Colors.black)),
+            Text("주문내역", style: TextStyle(fontSize: 20, color: Colors.white)),
           ],
         ),
       ),
