@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:table_order/pages/help_page.dart';
+import 'package:table_order/pages/help/help_page.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -11,7 +11,7 @@ class BottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          const Expanded(
+          Expanded(
             flex: 6,
             child: Center(),
           ),
@@ -39,17 +39,17 @@ class BottomBar extends StatelessWidget {
         );
       },
       child: Container(
-        padding: const EdgeInsets.all(5),
+        padding: EdgeInsets.all(5),
         height: double.infinity,
         color: Colors.indigo.shade400,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.person_add, color: Colors.white),
+            Icon(Icons.person_add, color: Colors.white),
             Container(
               width: 10,
             ),
-            const Text("직원호출", style: TextStyle(fontSize: 20, color: Colors.white)),
+            Text("직원호출", style: TextStyle(fontSize: 20, color: Colors.white)),
           ],
         ),
       ),
@@ -63,17 +63,17 @@ class BottomBar extends StatelessWidget {
         //
       },
       child: Container(
-        padding: const EdgeInsets.all(5),
+        padding: EdgeInsets.all(5),
         height: double.infinity,
         color: Colors.green.shade300,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.list_alt_rounded, color: Colors.white),
+            Icon(Icons.list_alt_rounded, color: Colors.white),
             Container(
               width: 10,
             ),
-            const Text("주문내역", style: TextStyle(fontSize: 20, color: Colors.white)),
+            Text("주문내역", style: TextStyle(fontSize: 20, color: Colors.white)),
           ],
         ),
       ),
