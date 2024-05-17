@@ -1,10 +1,10 @@
-import 'package:table_order/services/models/menu.dart';
+import 'package:table_order/controller/models/menu.dart';
 
-class MenuRepo {
-  Future<List<Menu>> fetchMenu(int merchantId, int branchId) async {
+class ItemRepo {
+  Future<List<Item>> fetchItem(int merchantId, int branchId) async {
     return Future(() {
       return [
-        Menu(
+        Item(
           id: 1,
           title: "치즈 피자",
           price: 24000,
@@ -17,7 +17,7 @@ class MenuRepo {
           groups: [1, 3],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 2,
           title: "살라미 피자",
           price: 22000,
@@ -30,7 +30,7 @@ class MenuRepo {
           groups: [1, 3],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 3,
           title: "슈프림 피자",
           price: 23000,
@@ -43,7 +43,7 @@ class MenuRepo {
           groups: [1, 3],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 4,
           title: "시금치 살라미 피자",
           price: 21000,
@@ -55,7 +55,7 @@ class MenuRepo {
           groups: [3],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 5,
           title: "베이컨 피자",
           price: 25000,
@@ -67,7 +67,7 @@ class MenuRepo {
           groups: [3],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 6,
           title: "양상추 샐러드",
           price: 9000,
@@ -79,7 +79,7 @@ class MenuRepo {
           groups: [4, 1],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 7,
           title: "구운버섯 샐러드",
           price: 9900,
@@ -91,7 +91,7 @@ class MenuRepo {
           groups: [4, 1],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 8,
           title: "닭가슴살 샐러드",
           price: 9900,
@@ -103,7 +103,7 @@ class MenuRepo {
           groups: [4],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 8,
           title: "닭가슴살 샐러드",
           price: 9900,
@@ -115,7 +115,7 @@ class MenuRepo {
           groups: [4],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 9,
           title: "복숭아 샐러드",
           price: 9900,
@@ -127,7 +127,7 @@ class MenuRepo {
           groups: [4],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 10,
           title: "키위,수박 주스",
           price: 6500,
@@ -139,7 +139,7 @@ class MenuRepo {
           groups: [6, 1],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 11,
           title: "모히또",
           price: 6500,
@@ -151,7 +151,7 @@ class MenuRepo {
           groups: [6, 1],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 12,
           title: "콜라",
           price: 3000,
@@ -163,7 +163,7 @@ class MenuRepo {
           groups: [6],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 13,
           title: "사이다",
           price: 3000,
@@ -174,7 +174,7 @@ class MenuRepo {
           groups: [6],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 14,
           title: "맥주",
           price: 5000,
@@ -186,7 +186,7 @@ class MenuRepo {
           groups: [6],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 15,
           title: "치즈스틱",
           price: 4000,
@@ -198,7 +198,7 @@ class MenuRepo {
           groups: [5],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 16,
           title: "떡볶이",
           price: 4500,
@@ -210,7 +210,7 @@ class MenuRepo {
           groups: [5],
           badges: [],
         ),
-        Menu(
+        Item(
           id: 16,
           title: "버팔로 윙",
           price: 6000,

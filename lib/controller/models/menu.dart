@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'menu.g.dart';
 
 @JsonSerializable()
-class Menu {
+class Item {
   final int id;
   final String title;
   final double price;
@@ -12,7 +12,7 @@ class Menu {
   final List<int> groups;
   final List<int> badges;
 
-  Menu({
+  Item({
     required this.id,
     required this.title,
     required this.price,
@@ -22,6 +22,6 @@ class Menu {
     required this.badges,
   });
 
-  factory Menu.fromJson(Map<String, dynamic> json) => _$MenuFromJson(json);
-  Map<String, dynamic> toJson() => _$MenuToJson(this);
+  factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
+  Map<String, dynamic> toJson() => _$ItemToJson(this);
 }

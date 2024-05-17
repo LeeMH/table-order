@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:table_order/services/models/menu.dart';
-import 'package:table_order/services/states/group_state.dart';
-import 'package:table_order/services/states/menu_state.dart';
+import 'package:table_order/controller/group_controller.dart';
+import 'package:table_order/controller/item_controller.dart';
+import 'package:table_order/controller/models/menu.dart';
 import 'package:table_order/util.dart';
 
 class MenuList extends StatelessWidget {
@@ -11,8 +11,8 @@ class MenuList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var menu = MenuState.to
-          .getMenuBySelectedGroupId(GroupState.to.getSelectedGroupId());
+      var menu = ItemController.to
+          .getItemsBySelectedGroupId(GroupController.to.getSelectedGroupId());
 
       return Container(
         color: Colors.white70,
@@ -32,12 +32,12 @@ class MenuList extends StatelessWidget {
     });
   }
 
-  Widget buildMenu(Menu menu) {
+  Widget buildMenu(Item item) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: GestureDetector(
         onTap: () {
-          MenuState.to.updateSelectedMenu(menu.id);
+          ItemController.to.updateSelectedItem(item.id);
         },
         child: Container(
           //color: Colors.red,
@@ -49,17 +49,17 @@ class MenuList extends StatelessWidget {
                 flex: 8,
                 child: ClipPath(
                   clipper: CustomImageClipper(),
-                  child: Image(image: NetworkImage(menu.image)),
+                  child: Image(image: NetworkImage(item.image)),
                 ),
               ),
               Expanded(
                   flex: 1,
                   child: Text(
-                    menu.title,
+                    item.title,
                     style: TextStyle(fontSize: 20),
                   )),
               Expanded(
-                  flex: 1, child: Text(Util.formatNumber(menu.price.toInt()))),
+                  flex: 1, child: Text(Util.formatNumber(item.price.toInt()))),
             ],
           ),
         ),

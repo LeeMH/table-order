@@ -1,4 +1,4 @@
-import 'package:table_order/services/models/help.dart';
+import 'package:table_order/controller/models/help.dart';
 
 class HelpRepo {
   Future<List<Help>> fetchHelps(int merchantId, int branchId) async {

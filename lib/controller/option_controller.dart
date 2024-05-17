@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:table_order/services/models/option.dart';
+import 'package:table_order/controller/models/option.dart';
 
 class OptionState extends GetxController {
   static OptionState get to => Get.find();

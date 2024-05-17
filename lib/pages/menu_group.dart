@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:table_order/services/states/group_state.dart';
+import 'package:table_order/controller/group_controller.dart';
 
 class MenuGroup extends StatelessWidget {
   const MenuGroup({super.key});
@@ -19,7 +19,7 @@ class MenuGroup extends StatelessWidget {
   }
 
   List<Widget> getGroup() {
-    return GroupState.to
+    return GroupController.to
         .getGroups()
         .map(
           (g) => Obx(() => buildGroupItem(g.id, g.title)),
@@ -29,13 +29,13 @@ class MenuGroup extends StatelessWidget {
 
   Widget buildGroupItem(int id, String title) {
     // 선택된 메뉴인가?
-    bool selected = (GroupState.to.getSelectedGroupId() == id);
+    bool selected = (GroupController.to.getSelectedGroupId() == id);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0, 10.0),
       child: GestureDetector(
         onTap: () {
-          GroupState.to.updateSelectedGroup(id);
+          GroupController.to.updateSelectedGroup(id);
         },
         child: Container(
           width: double.infinity,

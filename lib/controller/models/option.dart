@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:table_order/services/models/option_item.dart';
+import 'package:table_order/controller/models/option_item.dart';
 
 part 'option.g.dart';
 

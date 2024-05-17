@@ -1,4 +1,4 @@
-import 'package:table_order/services/models/group.dart';
+import 'package:table_order/controller/models/group.dart';
 
 class GroupRepo {
   Future<List<Group>> fetchGroups(int merchantId, int branchId) async {
