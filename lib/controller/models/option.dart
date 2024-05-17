@@ -7,14 +7,14 @@ part 'option.g.dart';
 class Option {
   final int id;
   final String title;
-  final bool fixedCount;
+  final int minCount;
   final int maxCount;
   final List<OptionItem> items;
 
   Option({
     required this.id,
     required this.title,
-    required this.fixedCount,
+    required this.minCount,
     required this.maxCount,
     required this.items,
   });

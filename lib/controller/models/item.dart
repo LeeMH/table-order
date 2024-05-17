@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'menu.g.dart';
+part 'item.g.dart';
 
 @JsonSerializable()
 class Item {
@@ -9,7 +9,10 @@ class Item {
   final double price;
   final String image;
   final List<String> detailImages;
+  final String description;
+  final int maxOrderCount;
   final List<int> groups;
+  final List<int> options;
   final List<int> badges;
 
   Item({
@@ -18,7 +21,10 @@ class Item {
     required this.price,
     required this.image,
     required this.detailImages,
+    required this.description,
+    required this.maxOrderCount,
     required this.groups,
+    required this.options,
     required this.badges,
   });
 

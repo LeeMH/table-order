@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_order/controller/group_controller.dart';
 import 'package:table_order/controller/item_controller.dart';
-import 'package:table_order/controller/models/menu.dart';
+import 'package:table_order/controller/models/item.dart';
+import 'package:table_order/pages/item_detail/item_detail_page.dart';
 import 'package:table_order/util.dart';
 
-class MenuList extends StatelessWidget {
-  const MenuList({super.key});
+class ItemList extends StatelessWidget {
+  const ItemList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +26,28 @@ class MenuList extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             // 각 목록 아이템 생성
-            return buildMenu(items[index]);
+            return buildMenu(context, items[index]);
           },
         ),
       );
     });
   }
 
-  Widget buildMenu(Item item) {
+  Widget buildMenu(BuildContext context, Item item) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: GestureDetector(
         onTap: () {
           ItemController.to.updateSelectedItem(item.id);
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              opaque: false, // 배경을 투명하게 설정
+              pageBuilder: (BuildContext context, _, __) {
+                return ItemDetailPage();
+              },
+            ),
+          );
         },
         child: Container(
           //color: Colors.red,

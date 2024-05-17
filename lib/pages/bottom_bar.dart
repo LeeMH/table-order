@@ -7,11 +7,11 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      color: Colors.white,
+      color: Colors.white54,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Expanded(
+          const Expanded(
             flex: 6,
             child: Center(),
           ),
@@ -39,17 +39,17 @@ class BottomBar extends StatelessWidget {
         );
       },
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         height: double.infinity,
         color: Colors.indigo.shade400,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.person_add, color: Colors.white),
+            const Icon(Icons.person_add, color: Colors.white),
             Container(
               width: 10,
             ),
-            Text("직원호출", style: TextStyle(fontSize: 20, color: Colors.white)),
+            const Text("직원호출", style: TextStyle(fontSize: 20, color: Colors.white)),
           ],
         ),
       ),
@@ -63,17 +63,17 @@ class BottomBar extends StatelessWidget {
         //
       },
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         height: double.infinity,
         color: Colors.green.shade300,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.list_alt_rounded, color: Colors.white),
+            const Icon(Icons.list_alt_rounded, color: Colors.white),
             Container(
               width: 10,
             ),
-            Text("주문내역", style: TextStyle(fontSize: 20, color: Colors.white)),
+            const Text("주문내역", style: TextStyle(fontSize: 20, color: Colors.white)),
           ],
         ),
       ),

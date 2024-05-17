@@ -16,4 +16,11 @@ class Util {
       return "";
     }
   }
+
+  static int countSameElements(List<dynamic> list1, List<dynamic> list2) {
+    var set1 = list1.toSet();
+    var set2 = list2.toSet();
+
+    return set1.intersection(set2).length;
+  }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_order/pages/bottom_bar.dart';
-import 'package:table_order/pages/menu_group.dart';
-import 'package:table_order/pages/menu_list.dart';
+import 'package:table_order/pages/item_group.dart';
+import 'package:table_order/pages/item_list.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -10,7 +10,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white54,
         leading: const Hero(
             tag: 'logo',
             child: Padding(
@@ -22,16 +22,16 @@ class MainPage extends StatelessWidget {
           style: TextStyle(fontSize: 30),
         ),
       ),
-      body: Row(
+      body: const Row(
         children: [
           Expanded(flex: 2, child: MenuGroup()),
           Expanded(
             flex: 8,
-            child: MenuList(),
+            child: ItemList(),
           ),
         ],
       ),
-      bottomNavigationBar: BottomBar(),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 }

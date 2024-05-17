@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'menu.dart';
+part of 'item.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -14,7 +14,12 @@ Item _$ItemFromJson(Map<String, dynamic> json) => Item(
       detailImages: (json['detailImages'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      description: json['description'] as String,
+      maxOrderCount: (json['maxOrderCount'] as num).toInt(),
       groups: (json['groups'] as List<dynamic>)
+          .map((e) => (e as num).toInt())
+          .toList(),
+      options: (json['options'] as List<dynamic>)
           .map((e) => (e as num).toInt())
           .toList(),
       badges: (json['badges'] as List<dynamic>)
@@ -28,6 +33,9 @@ Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
       'price': instance.price,
       'image': instance.image,
       'detailImages': instance.detailImages,
+      'description': instance.description,
+      'maxOrderCount': instance.maxOrderCount,
       'groups': instance.groups,
+      'options': instance.options,
       'badges': instance.badges,
     };

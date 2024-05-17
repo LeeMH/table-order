@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:table_order/controller/models/menu.dart';
+import 'package:table_order/controller/models/item.dart';
 import 'package:table_order/controller/repository/item_repo.dart';
 
 class ItemController extends GetxController {
@@ -28,5 +28,9 @@ class ItemController extends GetxController {
 
   int getSelectedItemId() {
     return _selected.value;
+  }
+
+  Item getSelectedItem() {
+    return _items.firstWhere((m) => m.id == _selected.value);
   }
 }

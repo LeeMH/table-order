@@ -41,7 +41,7 @@ class HelpPage extends StatelessWidget {
 
   // 상단 패널
   Widget buildTopPanner(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 50,
       width: double.infinity,
       child: Row(
@@ -50,7 +50,7 @@ class HelpPage extends StatelessWidget {
           IconButton(
             onPressed: () => close(context),
             iconSize: 30,
-            icon: Icon(
+            icon: const Icon(
               Icons.close,
               color: Colors.black,
             ),
@@ -65,7 +65,7 @@ class HelpPage extends StatelessWidget {
 
     return GridView.builder(
       itemCount: helps.length, // 총 목록의 수
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2, // 가로의 아이템 갯수를 3개로 지정
         mainAxisSpacing: 20.0, // 아이템들 사이의 간격
         crossAxisSpacing: 30.0, // 아이템들 사이의 간격
@@ -89,7 +89,7 @@ class HelpPage extends StatelessWidget {
         },
         child: Container(
           width: double.infinity, // 박스의 너비
-          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16), // 내부 패딩
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16), // 내부 패딩
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10), // 박스의 모서리 둥글게
             border: Border.all(color: Colors.grey[300]!), // 외곽선
@@ -102,7 +102,7 @@ class HelpPage extends StatelessWidget {
                 color: color,
                 weight: selected ? 20.0 : 10.0,
               ), // 체크 아이콘
-              SizedBox(width: 10), // 아이콘과 텍스트 사이 간격
+              const SizedBox(width: 10), // 아이콘과 텍스트 사이 간격
               Text(
                 help.title,
                 style: TextStyle(
@@ -119,7 +119,7 @@ class HelpPage extends StatelessWidget {
 
   // 하단 패널
   Widget buildBottomPanner(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 50,
       width: double.infinity,
       child: Row(
@@ -136,7 +136,7 @@ class HelpPage extends StatelessWidget {
                 color: Colors.grey,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.close, color: Colors.white),
@@ -156,7 +156,7 @@ class HelpPage extends StatelessWidget {
               color: Colors.indigo.shade400,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(

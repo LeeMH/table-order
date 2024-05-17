@@ -7,11 +7,13 @@ class OptionItem {
   final int id;
   final String title;
   final double price;
+  final bool defChoice;
 
   OptionItem({
     required this.id,
     required this.title,
     required this.price,
+    required this.defChoice,
   });
 
   factory OptionItem.fromJson(Map<String, dynamic> json) =>
