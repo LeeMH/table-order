@@ -4,19 +4,33 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is for simple & free table order app.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
 ## Model Object build
 
 ```bash
 dart run build_runner build
+```
+
+## Model file
+
+```sql
+#########################
+# ITEM_GROUP TABLE
+#########################
+DROP TABLE ITEM_GROUP;
+CREATE TABLE ITEM_GROUP (
+    id INTEGER PRIMARY KEY,
+    title TEXT,
+    order_value INTEGER
+);
+
+insert into ITEM_GROUP(title, order_value) values 
+('베스트', 10),
+('세트', 20),
+('피자', 30),
+('샐러드', 40),
+('사이드', 50),
+('음료', 60);
 ```
