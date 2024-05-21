@@ -1,6 +1,43 @@
 import 'package:table_order/controller/models/item.dart';
+import 'package:table_order/controller/repository/database.dart';
 
 class ItemRepo {
+  Future<List<Item>> fetchByGroupId(int groupId) async {
+    try {
+      final db = await DataBase().database;
+      final sql = '''
+SELECT i.*
+FROM  items i
+JOIN  group_item gi ON i.id = gi.item_id
+WHERE gi.group_id = $groupId
+ORDER BY i.order_value
+''';
+
+      List<Map> rows = await db.rawQuery(sql);
+      return Future(() {
+        return rows
+            .map(
+              (e) => Item(
+                  id: e['id'],
+                  title: e['title'],
+                  price: e['price'],
+                  image: e['image'].toString(),
+                  detailImages: e['detail_images']
+                      .toString()
+                      .split(',')
+                      .map((s) => s.trim())
+                      .toList(),
+                  description: e['description'],
+                  maxOrderCount: e['max_order_count']),
+            )
+            .toList();
+      });
+    } catch (e) {
+      print('Error fetching items: $e');
+      return [];
+    }
+  }
+/*
   Future<List<Item>> fetchItem(int merchantId, int branchId) async {
     return Future(() {
       return [
@@ -275,4 +312,5 @@ class ItemRepo {
       ];
     });
   }
+  */
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_order/controller/models/item.dart';
 import 'package:table_order/controller/models/option.dart';
-import 'package:table_order/controller/models/option_item.dart';
+import 'package:table_order/controller/models/option_pick.dart';
 import 'package:table_order/controller/option_controller.dart';
 import 'package:table_order/controller/order_controller.dart';
 import 'package:table_order/pages/widgets/line.dart';
@@ -10,31 +10,48 @@ import 'package:table_order/util.dart';
 
 class ItemDetailRight extends StatelessWidget {
   final Item item;
+  ItemDetailRight({super.key, required this.item});
 
-  const ItemDetailRight({super.key, required this.item});
+  final OptionController optionController = OptionController();
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            buildItemDescription(item), // 상품 설명
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: Line(),
-            ),
-            buildQtt(item), // 수량
-            ...buildOptions(item), // 선택 옵션들
-          ],
-        ),
-      ),
-    );
+    var optionFuture = optionController.getOptionsByItemId(item.id);
+    var optionPickFuture = optionController.getOptionPickByItemId(item.id);
+    return FutureBuilder(
+        future: Future.wait([optionFuture, optionPickFuture]),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator(); // Or some other placeholder.
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            var options = snapshot.data?[0] as List<Option>;
+            var optionPicks = snapshot.data?[1] as List<OptionPick>;
+
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    buildItemDescription(item), // 상품 설명
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      child: Line(),
+                    ),
+                    buildQtt(item), // 수량
+                    ...buildOptions(item, options, optionPicks), // 선택 옵션들
+                  ],
+                ),
+              ),
+            );
+          }
+        });
   }
 
   Widget buildItemDescription(Item item) {
-    bool needMore = item.description.split("\n").length > 2;
+    String description = item.description.replaceAll('<br>', '\n');
+    bool needMore = description.split('\n').length > 2;
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -46,7 +63,7 @@ class ItemDetailRight extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            item.description,
+            description,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(fontSize: 20),
@@ -138,23 +155,25 @@ class ItemDetailRight extends StatelessWidget {
     );
   }
 
-  List<Widget> buildOptions(Item item) {
-    var options = <Widget>[];
-    for (Option option in OptionController.to.getOptions(item.options)) {
-      options.addAll(buildOptionTitle(option));
-      options.addAll(buildOptionItems(option));
-      options.add(const SizedBox(height: 10));
+  List<Widget> buildOptions(
+      Item item, List<Option> options, List<OptionPick> optionPicks) {
+    var optionWidgets = <Widget>[];
+    for (Option option in options) {
+      var picks = optionPicks.where((p) => p.optionId == option.id).toList();
+      optionWidgets.addAll(buildOptionTitle(option));
+      optionWidgets.addAll(buildOptionPick(option, picks));
+      optionWidgets.add(const SizedBox(height: 10));
     }
 
-    return options;
+    return optionWidgets;
   }
 
   List<Widget> buildOptionTitle(Option option) {
     var count = '';
-    if (option.minCount == option.maxCount) {
-      count = '(${option.minCount}개 필수 선택)';
+    if (option.minPick == option.maxPick) {
+      count = '(${option.minPick}개 필수 선택)';
     } else {
-      count = '(${option.minCount} ~ ${option.maxCount}개 선택)';
+      count = '(${option.minPick} ~ ${option.maxPick}개 선택)';
     }
 
     return [
@@ -180,26 +199,26 @@ class ItemDetailRight extends StatelessWidget {
     ];
   }
 
-  List<Widget> buildOptionItems(Option option) {
+  List<Widget> buildOptionPick(Option option, List<OptionPick> optionPicks) {
     var optionItems = <Widget>[]; // 옵션 아이템 위젯들을 담을 리스트
 
-    for (OptionItem optionItem in option.items) {
-      optionItems.add(buildOptionButton(option, optionItem));
-      optionItems.add(SizedBox(height: 5));
+    for (OptionPick optionPick in optionPicks) {
+      optionItems.add(buildOptionButton(option, optionPick));
+      optionItems.add(const SizedBox(height: 5));
     }
 
     return optionItems;
   }
 
-  Widget buildOptionButton(Option option, OptionItem optionItem) {
+  Widget buildOptionButton(Option option, OptionPick optionPick) {
     return Obx(() {
-      bool selected = OrderController.to.isSelectedOption(optionItem.id);
+      bool selected = OrderController.to.isSelectedOption(optionPick.id);
       Color color = selected ? Colors.black : Colors.grey;
 
       return GestureDetector(
         onTap: () {
           // 최대 수량이 넘어갔는지 체크해야 한다!!
-          OrderController.to.updateOption(optionItem.id, option);
+          OrderController.to.updateOption(optionPick.id, option);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -217,7 +236,7 @@ class ItemDetailRight extends StatelessWidget {
               ), // 체크 아이콘
               const SizedBox(width: 10), // 아이콘과 텍스트 사이 간격
               Text(
-                optionItem.title,
+                optionPick.title,
                 style: TextStyle(
                     fontSize: 20,
                     color: color,
@@ -225,8 +244,8 @@ class ItemDetailRight extends StatelessWidget {
               ), // 옵션 텍스트
               const SizedBox(width: 10), // 아이콘과 텍스트 사이 간격
               Text(
-                optionItem.price > 0
-                    ? '(+${Util.formatNumber(optionItem.price.toInt())})'
+                optionPick.price > 0
+                    ? '(+${Util.formatNumber(optionPick.price)})'
                     : '',
                 style: TextStyle(
                     fontSize: 18,

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:table_order/controller/models/option.dart';
+import 'package:table_order/controller/models/option_pick.dart';
 import 'package:table_order/util.dart';
 
 class OrderController extends GetxController {
@@ -37,18 +38,18 @@ class OrderController extends GetxController {
   }
 
   void updateOption(int val, Option option) {
-    List<int> relatedOptions = option.items.map((e) => e.id).toList();
+    /*
     int selected = Util.countSameElements(relatedOptions, _options.toList());
 
     // 최대, 최소 1개이면 flip 효과를 내기 위해 선택된 모든값을 제거
-    if (option.minCount == 1 && option.maxCount == 1) {
+    if (option.minPick == 1 && option.maxPick == 1) {
       relatedOptions.where((e) => e != val).forEach((e) {
         _options.remove(e);
       });
     }
 
     // 최대 선택 갯수를 넘어가면 return
-    if (selected >= option.maxCount &&
+    if (selected >= option.maxPick &&
         option.maxCount > 1 &&
         !_options.contains(val)) return;
 
@@ -58,6 +59,7 @@ class OrderController extends GetxController {
       _options.add(val);
     }
     update();
+    */
   }
 
   bool isSelectedOption(int val) {

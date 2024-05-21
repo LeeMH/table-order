@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:table_order/controller/help_controller.dart';
-import 'package:table_order/controller/item_controller.dart';
-import 'package:table_order/controller/option_controller.dart';
 import 'package:table_order/controller/order_controller.dart';
 import 'package:table_order/pages/main_page.dart';
 import 'package:table_order/controller/group_controller.dart';
 
 void main() {
+  sqfliteFfiInit(); // sqflite_common_ffi를 사용하는 경우 초기화
+  databaseFactory = databaseFactoryFfi; // sqflite_common_ffi를 사용하는 경우 초기화
   Get.put(GroupController(), permanent: true);
-  Get.put(ItemController(), permanent: true);
   Get.put(HelpController(), permanent: true);
   Get.put(OrderController(), permanent: true);
-  Get.put(OptionController(), permanent: true);
   runApp(const MyApp());
 }
 
@@ -28,9 +27,7 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(
           future: Future.wait([
             GroupController.to.initState(0, 0),
-            ItemController.to.initState(0, 0),
             HelpController.to.initState(0, 0),
-            OptionController.to.initState(0, 0),
           ]),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

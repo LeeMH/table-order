@@ -1,7 +1,14 @@
-import 'package:get/get.dart';
 import 'package:table_order/controller/models/item.dart';
 import 'package:table_order/controller/repository/item_repo.dart';
 
+class ItemController {
+  final ItemRepo itemRepo = ItemRepo();
+
+  Future<List<Item>> getItemsByGroupId(int groupId) async {
+    return await itemRepo.fetchByGroupId(groupId);
+  }
+}
+/*
 class ItemController extends GetxController {
   static ItemController get to => Get.find();
   final ItemRepo itemRepo = ItemRepo();
@@ -34,3 +41,4 @@ class ItemController extends GetxController {
     return _items.firstWhere((m) => m.id == _selected.value);
   }
 }
+*/

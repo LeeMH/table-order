@@ -22,9 +22,9 @@ class MainPage extends StatelessWidget {
           style: TextStyle(fontSize: 30),
         ),
       ),
-      body: const Row(
+      body: Row(
         children: [
-          Expanded(flex: 2, child: MenuGroup()),
+          const Expanded(flex: 2, child: MenuGroup()),
           Expanded(
             flex: 8,
             child: ItemList(),

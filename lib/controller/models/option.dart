@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:table_order/controller/models/option_item.dart';
 
 part 'option.g.dart';
 
@@ -7,16 +6,14 @@ part 'option.g.dart';
 class Option {
   final int id;
   final String title;
-  final int minCount;
-  final int maxCount;
-  final List<OptionItem> items;
+  final int minPick;
+  final int maxPick;
 
   Option({
     required this.id,
     required this.title,
-    required this.minCount,
-    required this.maxCount,
-    required this.items,
+    required this.minPick,
+    required this.maxPick,
   });
 
   factory Option.fromJson(Map<String, dynamic> json) => _$OptionFromJson(json);

@@ -1,18 +1,17 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:table_order/controller/item_controller.dart';
+import 'package:table_order/controller/models/item.dart';
 import 'package:table_order/controller/order_controller.dart';
 import 'package:table_order/pages/item_detail/_item_detail_left.dart';
 import 'package:table_order/pages/item_detail/_item_detail_right.dart';
 
 class ItemDetailPage extends StatelessWidget {
-  const ItemDetailPage({super.key});
+  final Item selectedItem;
+  const ItemDetailPage({super.key, required this.selectedItem});
 
   @override
   Widget build(BuildContext context) {
     OrderController.to.clear();
-    var selectedItem = ItemController.to.getSelectedItem();
 
     return Scaffold(
       backgroundColor: Colors.transparent, // 배경을 투명하게

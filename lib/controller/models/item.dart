@@ -6,14 +6,11 @@ part 'item.g.dart';
 class Item {
   final int id;
   final String title;
-  final double price;
+  final int price;
   final String image;
   final List<String> detailImages;
   final String description;
   final int maxOrderCount;
-  final List<int> groups;
-  final List<int> options;
-  final List<int> badges;
 
   Item({
     required this.id,
@@ -23,9 +20,6 @@ class Item {
     required this.detailImages,
     required this.description,
     required this.maxOrderCount,
-    required this.groups,
-    required this.options,
-    required this.badges,
   });
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);

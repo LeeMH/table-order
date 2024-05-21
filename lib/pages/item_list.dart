@@ -7,28 +7,41 @@ import 'package:table_order/pages/item_detail/item_detail_page.dart';
 import 'package:table_order/util.dart';
 
 class ItemList extends StatelessWidget {
-  const ItemList({super.key});
+  ItemList({super.key});
+  final ItemController _itemController = ItemController();
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var items = ItemController.to
-          .getItemsBySelectedGroupId(GroupController.to.getSelectedGroupId());
+      var itemFuture = _itemController
+          .getItemsByGroupId(GroupController.to.getSelectedGroupId());
 
-      return Container(
-        color: Colors.white70,
-        child: GridView.builder(
-          itemCount: items.length, // 총 목록의 수
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, // 행에 표시될 위젯 수
-            crossAxisSpacing: 10.0, // 가로 간격
-            mainAxisSpacing: 10.0, // 세로 간격
-          ),
-          itemBuilder: (context, index) {
-            // 각 목록 아이템 생성
-            return buildMenu(context, items[index]);
-          },
-        ),
+      return FutureBuilder(
+        future: itemFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            final items = snapshot.data!;
+            return Container(
+              color: Colors.white70,
+              child: GridView.builder(
+                itemCount: items.length, // 총 목록의 수
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, // 행에 표시될 위젯 수
+                  crossAxisSpacing: 10.0, // 가로 간격
+                  mainAxisSpacing: 10.0, // 세로 간격
+                ),
+                itemBuilder: (context, index) {
+                  // 각 목록 아이템 생성
+                  return buildMenu(context, items[index]);
+                },
+              ),
+            );
+          }
+        },
       );
     });
   }
@@ -38,13 +51,13 @@ class ItemList extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: GestureDetector(
         onTap: () {
-          ItemController.to.updateSelectedItem(item.id);
+          //ItemController.to.updateSelectedItem(item.id);
           Navigator.push(
             context,
             PageRouteBuilder(
               opaque: false, // 배경을 투명하게 설정
               pageBuilder: (BuildContext context, _, __) {
-                return ItemDetailPage();
+                return ItemDetailPage(selectedItem: item);
               },
             ),
           );
