@@ -102,38 +102,38 @@ INSERT INTO GROUP_ITEM VALUES
 (6, 12),(6, 13),(6, 14),(5, 15),(5, 16),(5, 17);
 
 #########################
-# OPTIONS TABLE
+# OPTION_GROUPS TABLE
 #########################
-DROP TABLE OPTIONS;
-CREATE TABLE OPTIONS (
+DROP TABLE OPTION_GROUPS;
+CREATE TABLE OPTION_GROUPS (
     id INTEGER PRIMARY KEY,
     title TEXT,
     min_pick INTEGER,
     max_pick INTEGER,
     order_value INTEGER
 );
-INSERT INTO OPTIONS(id, title, min_pick, max_pick) VALUES
+INSERT INTO OPTION_GROUPS(id, title, min_pick, max_pick) VALUES
 (1, '사이즈', 1, 1),
 (2, '토핑', 1, 3),
 (3, '얼음', 1, 1),
 (4, '맵기', 1, 1),
-(5, '제공 사이드', 1, 3);
+(5, '제공 사이드', 0, 3);
 
 #########################
-# OPTION_PICK TABLE
+# OPTIONS TABLE
 #########################
-DROP TABLE OPTION_PICK;
-CREATE TABLE OPTION_PICK (
+DROP TABLE OPTIONS;
+CREATE TABLE OPTIONS (
     id INTEGER PRIMARY KEY,
-    option_id INTEGER,
+    option_group_id INTEGER,
     title TEXT,
     price INTEGER,
     default_pick INTEGER,    
     order_value INTEGER
 );
-CREATE INDEX IDX1 ON OPTION_PICK (option_id);
+CREATE INDEX IDX1 ON OPTIONS (option_group_id);
 
-INSERT INTO OPTION_PICK(id, option_id, title, price, default_pick) VALUES
+INSERT INTO OPTIONS(id, option_group_id, title, price, default_pick) VALUES
 (1, 1, 'Small', 0, 1),
 (2, 1, 'Medium', 2000, 0),
 (3, 1, 'Large', 3000, 0),
@@ -148,21 +148,21 @@ INSERT INTO OPTION_PICK(id, option_id, title, price, default_pick) VALUES
 (12, 4, '보통', 0, 1),
 (13, 4, '매콤한맛', 0, 0),
 (14, 4, '매운맛', 0, 0),
-(15, 5, '단무지', 0, 1),
+(15, 5, '단무지', 0, 0),
 (16, 5, '피클', 0, 0),
 (17, 5, '할리피뇨', 0, 0);
 
 #########################
-# ITEM_OPTION TABLE
+# ITEM_OPTION_GROUP TABLE
 #########################
-DROP TABLE ITEM_OPTION;
-CREATE TABLE ITEM_OPTION (
+DROP TABLE ITEM_OPTION_GROUP;
+CREATE TABLE ITEM_OPTION_GROUP (
     item_id INTEGER,
-    option_id INTEGER,
-    PRIMARY KEY (item_id, option_id)
+    option_group_id INTEGER,
+    PRIMARY KEY (item_id, option_group_id)
 );
 
-INSERT INTO ITEM_OPTION VALUES
+INSERT INTO ITEM_OPTION_GROUP VALUES
 (1, 1),(1, 2),(1, 5),(2, 1),(2, 2),(2, 5),(3, 1),(3, 2),
 (3, 5),(4, 1),(4, 2),(4, 5),(5, 1),(5, 2),(5, 5),(10, 3),
 (11, 3),(12, 3),(13, 3),(16, 4);

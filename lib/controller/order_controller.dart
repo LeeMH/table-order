@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:table_order/controller/models/option.dart';
-import 'package:table_order/controller/models/option_pick.dart';
-import 'package:table_order/util.dart';
+import 'package:table_order/controller/models/option_group.dart';
 
 class OrderController extends GetxController {
   static OrderController get to => Get.find();
@@ -37,7 +35,7 @@ class OrderController extends GetxController {
     update();
   }
 
-  void updateOption(int val, Option option) {
+  void updateOption(int val, OptionGroup option) {
     /*
     int selected = Util.countSameElements(relatedOptions, _options.toList());
 

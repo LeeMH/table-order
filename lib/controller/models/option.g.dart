@@ -8,14 +8,16 @@ part of 'option.dart';
 
 Option _$OptionFromJson(Map<String, dynamic> json) => Option(
       id: (json['id'] as num).toInt(),
+      optionGroupId: (json['optionGroupId'] as num).toInt(),
       title: json['title'] as String,
-      minPick: (json['minPick'] as num).toInt(),
-      maxPick: (json['maxPick'] as num).toInt(),
+      price: (json['price'] as num).toInt(),
+      defaultPick: json['defaultPick'] as bool,
     );
 
 Map<String, dynamic> _$OptionToJson(Option instance) => <String, dynamic>{
       'id': instance.id,
+      'optionGroupId': instance.optionGroupId,
       'title': instance.title,
-      'minPick': instance.minPick,
-      'maxPick': instance.maxPick,
+      'price': instance.price,
+      'defaultPick': instance.defaultPick,
     };

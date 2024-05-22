@@ -1,23 +1,23 @@
 import 'package:table_order/controller/models/option.dart';
-import 'package:table_order/controller/models/option_pick.dart';
+import 'package:table_order/controller/models/option_group.dart';
 import 'package:table_order/controller/repository/database.dart';
 
 class OptionRepo {
-  Future<List<Option>> getOptionsByItemId(int itemId) async {
+  Future<List<OptionGroup>> getOptionGroupsByItemId(int itemId) async {
     try {
       final db = await DataBase().database;
       final sql = '''
-SELECT o.*
-FROM  options o
-JOIN  item_option io ON o.id = io.option_id
-WHERE io.item_id = $itemId
-ORDER BY o.order_value
+SELECT og.*
+FROM  item_option_group iog
+JOIN  option_groups og ON iog.option_group_id = og.id
+WHERE iog.item_id = $itemId
+ORDER BY og.order_value
 ''';
 
       List<Map> rows = await db.rawQuery(sql);
       return Future(() {
         return rows
-            .map((e) => Option(
+            .map((e) => OptionGroup(
                   id: e['id'],
                   title: e['title'],
                   minPick: e['min_pick'],
@@ -31,24 +31,24 @@ ORDER BY o.order_value
     }
   }
 
-  Future<List<OptionPick>> getOptionPickByItemId(int itemId) async {
+  Future<List<Option>> getOptionsByItemId(int itemId) async {
     try {
       final db = await DataBase().database;
       final sql = '''
-SELECT op.*
-FROM  option_pick op
-JOIN  options o ON op.option_id = o.id
-JOIN  item_option io ON o.id = io.option_id
-WHERE io.item_id = $itemId
-ORDER BY op.order_value
+SELECT o.*
+FROM  item_option_group iog
+JOIN  option_groups og ON iog.option_group_id = og.id
+JOIN  options o ON og.id = o.option_group_id
+WHERE iog.item_id = $itemId
+ORDER BY o.order_value
 ''';
 
       List<Map> rows = await db.rawQuery(sql);
       return Future(() {
         return rows
-            .map((e) => OptionPick(
+            .map((e) => Option(
                   id: e['id'],
-                  optionId: e['option_id'],
+                  optionGroupId: e['option_group_id'],
                   title: e['title'],
                   price: e['price'],
                   defaultPick: e['default_pick'] == 1,
