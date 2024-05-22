@@ -31,8 +31,7 @@ class ItemDetailRight extends StatelessWidget {
             var options = snapshot.data?[1] as List<Option>;
 
             // 디폴트 선택 옵션 초기화
-            var defaultPicked =
-                options.where((o) => o.defaultPick).map((o) => o.id).toList();
+            var defaultPicked = options.where((o) => o.defaultPick).toList();
             OrderController.to.initDefaultOptions(defaultPicked);
 
             return SingleChildScrollView(
@@ -152,9 +151,11 @@ class ItemDetailRight extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            OrderController.to.getQtt().toString(),
-            style: TextStyle(fontSize: 30, color: color),
+          Obx(
+            () => Text(
+              OrderController.to.getQtt().toString(),
+              style: TextStyle(fontSize: 30, color: color),
+            ),
           ),
         ],
       ),
@@ -219,13 +220,13 @@ class ItemDetailRight extends StatelessWidget {
 
   Widget buildOptionButton(OptionGroup optionGroup, Option option) {
     return Obx(() {
-      bool selected = OrderController.to.isPickedOption(option.id);
+      bool selected = OrderController.to.isPickedOption(option);
       Color color = selected ? Colors.black : Colors.grey;
 
       return GestureDetector(
         onTap: () {
           // 최대 수량이 넘어갔는지 체크해야 한다!!
-          OrderController.to.updateOption(optionGroup, option.id);
+          OrderController.to.updateOption(optionGroup, option);
         },
         child: Container(
           decoration: BoxDecoration(

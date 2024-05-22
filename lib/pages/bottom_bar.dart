@@ -69,7 +69,9 @@ class BottomBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.list_alt_rounded, color: Colors.white),
+            const Hero(
+                tag: 'cart',
+                child: Icon(Icons.list_alt_rounded, color: Colors.white)),
             Container(
               width: 10,
             ),

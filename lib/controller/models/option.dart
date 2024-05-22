@@ -20,4 +20,13 @@ class Option {
 
   factory Option.fromJson(Map<String, dynamic> json) => _$OptionFromJson(json);
   Map<String, dynamic> toJson() => _$OptionToJson(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Option && other.id == id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }
