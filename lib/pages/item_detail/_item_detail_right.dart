@@ -28,7 +28,12 @@ class ItemDetailRight extends StatelessWidget {
             return Text('Error: ${snapshot.error}');
           } else {
             var optionGroups = snapshot.data?[0] as List<OptionGroup>;
-            var optionPicks = snapshot.data?[1] as List<Option>;
+            var options = snapshot.data?[1] as List<Option>;
+
+            // 디폴트 선택 옵션 초기화
+            var defaultPicked =
+                options.where((o) => o.defaultPick).map((o) => o.id).toList();
+            OrderController.to.initDefaultOptions(defaultPicked);
 
             return SingleChildScrollView(
               child: Padding(
@@ -41,7 +46,7 @@ class ItemDetailRight extends StatelessWidget {
                       child: Line(),
                     ),
                     buildQtt(item), // 수량
-                    ...buildOptions(item, optionGroups, optionPicks), // 선택 옵션들
+                    ...buildOptions(item, optionGroups, options), // 선택 옵션들
                   ],
                 ),
               ),
@@ -214,13 +219,13 @@ class ItemDetailRight extends StatelessWidget {
 
   Widget buildOptionButton(OptionGroup optionGroup, Option option) {
     return Obx(() {
-      bool selected = OrderController.to.isSelectedOption(option.id);
+      bool selected = OrderController.to.isPickedOption(option.id);
       Color color = selected ? Colors.black : Colors.grey;
 
       return GestureDetector(
         onTap: () {
           // 최대 수량이 넘어갔는지 체크해야 한다!!
-          OrderController.to.updateOption(option.id, optionGroup);
+          OrderController.to.updateOption(optionGroup, option.id);
         },
         child: Container(
           decoration: BoxDecoration(

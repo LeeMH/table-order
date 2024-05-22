@@ -60,4 +60,33 @@ ORDER BY o.order_value
       return [];
     }
   }
+
+  Future<List<Option>> getOptionsByOptionGroupId(int optionGroupId) async {
+    try {
+      final db = await DataBase().database;
+      final sql = '''
+SELECT o.*
+FROM  options o
+WHERE o.option_group_id = $optionGroupId
+ORDER BY o.order_value
+''';
+
+      print(sql);
+      List<Map> rows = await db.rawQuery(sql);
+      return Future(() {
+        return rows
+            .map((e) => Option(
+                  id: e['id'],
+                  optionGroupId: e['option_group_id'],
+                  title: e['title'],
+                  price: e['price'],
+                  defaultPick: e['default_pick'] == 1,
+                ))
+            .toList();
+      });
+    } catch (e) {
+      print('Error fetching options: $e');
+      return [];
+    }
+  }
 }

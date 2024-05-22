@@ -21,6 +21,9 @@ class Util {
   }
 
   static int countSameElements(List<dynamic> list1, List<dynamic> list2) {
+    print('list1 => ${list1.map((e) => e.toString()).join(',')}');
+    print('list2 => ${list2.map((e) => e.toString()).join(',')}');
+
     var set1 = list1.toSet();
     var set2 = list2.toSet();
 

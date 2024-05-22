@@ -7,14 +7,14 @@ class Order {
   final int tableId;
   final int itemId;
   int qtt;
-  List<int> options;
+  List<int> pickOptions;
   String memo;
 
   Order({
     required this.tableId,
     required this.itemId,
     required this.qtt,
-    required this.options,
+    required this.pickOptions,
     required this.memo,
   });
 
