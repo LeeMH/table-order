@@ -10,8 +10,6 @@ class HelpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HelpController.to.clearSelectedHelpIds();
-
     return Scaffold(
       backgroundColor: Colors.transparent, // 배경을 투명하게
       body: Center(
@@ -61,60 +59,68 @@ class HelpPage extends StatelessWidget {
   }
 
   Widget buildHelpList() {
-    var helps = HelpController.to.getHelps();
-
-    return GridView.builder(
-      itemCount: helps.length, // 총 목록의 수
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // 가로의 아이템 갯수를 3개로 지정
-        mainAxisSpacing: 20.0, // 아이템들 사이의 간격
-        crossAxisSpacing: 30.0, // 아이템들 사이의 간격
-        childAspectRatio: 7.0, // 각 아이템의 높이/너비 비율 (1:1)
-      ),
-      itemBuilder: (context, index) {
-        // 각 목록 아이템 생성
-        return buildHelp(helps[index]);
-      },
-    );
+    return GetBuilder<HelpController>(
+        init: HelpController(),
+        builder: (controller) {
+          var helps = controller.getHelps();
+          return GridView.builder(
+            itemCount: helps.length, // 총 목록의 수
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // 가로의 아이템 갯수를 3개로 지정
+              mainAxisSpacing: 20.0, // 아이템들 사이의 간격
+              crossAxisSpacing: 30.0, // 아이템들 사이의 간격
+              childAspectRatio: 7.0, // 각 아이템의 높이/너비 비율 (1:1)
+            ),
+            itemBuilder: (context, index) {
+              // 각 목록 아이템 생성
+              return buildHelp(helps[index]);
+            },
+          );
+        });
   }
 
   Widget buildHelp(Help help) {
-    return Obx(() {
-      bool selected = HelpController.to.getSelectedHelpIds().contains(help.id);
-      Color color = selected ? Colors.black : Colors.grey;
+    return GetBuilder<HelpController>(
+      init: HelpController(),
+      builder: (controller) {
+        bool selected = controller.getSelectedHelpIds().contains(help.id);
+        Color color = selected ? Colors.black : Colors.grey;
 
-      return GestureDetector(
-        onTap: () {
-          HelpController.to.updateSelectedHelpId(help.id);
-        },
-        child: Container(
-          width: double.infinity, // 박스의 너비
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16), // 내부 패딩
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), // 박스의 모서리 둥글게
-            border: Border.all(color: Colors.grey[300]!), // 외곽선
-            color: Colors.white, // 내부 배경색
+        return GestureDetector(
+          onTap: () {
+            controller.updateSelectedHelpId(help.id);
+          },
+          child: Container(
+            width: double.infinity, // 박스의 너비
+            padding: const EdgeInsets.symmetric(
+                vertical: 8, horizontal: 16), // 내부 패딩
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), // 박스의 모서리 둥글게
+              border: Border.all(color: Colors.grey[300]!), // 외곽선
+              color: Colors.white, // 내부 배경색
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.check,
+                  color: color,
+                  weight: selected ? 20.0 : 10.0,
+                ), // 체크 아이콘
+                const SizedBox(width: 10), // 아이콘과 텍스트 사이 간격
+                Text(
+                  help.title,
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: color,
+                      fontWeight:
+                          selected ? FontWeight.bold : FontWeight.normal),
+                ), // 옵션 텍스트
+              ],
+            ),
           ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.check,
-                color: color,
-                weight: selected ? 20.0 : 10.0,
-              ), // 체크 아이콘
-              const SizedBox(width: 10), // 아이콘과 텍스트 사이 간격
-              Text(
-                help.title,
-                style: TextStyle(
-                    fontSize: 16,
-                    color: color,
-                    fontWeight: selected ? FontWeight.bold : FontWeight.normal),
-              ), // 옵션 텍스트
-            ],
-          ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   // 하단 패널

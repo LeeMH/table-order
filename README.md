@@ -166,4 +166,23 @@ INSERT INTO ITEM_OPTION_GROUP VALUES
 (1, 1),(1, 2),(1, 5),(2, 1),(2, 2),(2, 5),(3, 1),(3, 2),
 (3, 5),(4, 1),(4, 2),(4, 5),(5, 1),(5, 2),(5, 5),(10, 3),
 (11, 3),(12, 3),(13, 3),(16, 4);
+
+#########################
+# HELPS TABLE
+#########################
+DROP TABLE HELPS;
+CREATE TABLE HELPS (
+    id INTEGER PRIMARY KEY,
+    title TEXT,
+    order_value INTEGER
+);
+
+INSERT INTO HELPS(id, title) VALUES
+(1, '물'),
+(2, '물수건'),
+(3, '수저,젓가락,포크'),
+(4, '기본반찬 추가'),
+(5, '티슈'),
+(6, '기타');
+
 ```
