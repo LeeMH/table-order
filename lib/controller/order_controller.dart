@@ -2,25 +2,26 @@ import 'package:get/get.dart';
 import 'package:table_order/controller/models/item.dart';
 import 'package:table_order/controller/models/option.dart';
 import 'package:table_order/controller/models/option_group.dart';
+import 'package:table_order/controller/models/order.dart';
 import 'package:table_order/controller/repository/option_repo.dart';
+import 'package:table_order/controller/repository/order_repo.dart';
 import 'package:table_order/util.dart';
 
 class OrderController extends GetxController {
   static OrderController get to => Get.find();
 
+  OrderRepo orderRepo = OrderRepo();
   OptionRepo optionRepo = OptionRepo();
 
   late Item _item;
 
   final _qtt = 1.obs;
   final _pickOptions = RxList<Option>([]);
-  final _memo = ''.obs;
   final _totalPrice = 0.obs;
 
   Item getItem() => _item;
   int getQtt() => _qtt.value;
   List<Option> getPickOptions() => _pickOptions;
-  String getMemo() => _memo.value;
   int getTotalPrice() => _totalPrice.value;
 
   void init(Item item) {
@@ -28,7 +29,6 @@ class OrderController extends GetxController {
     _totalPrice.value = item.price;
     _qtt.value = 1;
     _pickOptions.clear();
-    _memo.value = '';
     update();
   }
 
@@ -102,8 +102,12 @@ class OrderController extends GetxController {
     return _pickOptions.contains(val);
   }
 
-  void updateMemo(String val) {
-    _memo.value = val;
-    update();
+  Future<void> addOrder() async {
+    var order = Order(
+        item: _item,
+        qtt: _qtt.value,
+        total: _totalPrice.value,
+        pickOptions: _pickOptions.toList());
+    orderRepo.addOrder(order);
   }
 }

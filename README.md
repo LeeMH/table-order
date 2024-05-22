@@ -185,4 +185,29 @@ INSERT INTO HELPS(id, title) VALUES
 (5, '티슈'),
 (6, '기타');
 
+#########################
+# ORDERS TABLE
+#########################
+DROP TABLE ORDERS;
+CREATE TABLE ORDERS (
+    id INTEGER PRIMARY KEY,
+    item_id INTEGER,
+    qtt INTEGER,
+    price INTEGER,
+    total INTEGER,
+    created_at INTEGER
+);
+
+#########################
+# ORDER_OPTIONS TABLE
+#########################
+DROP TABLE ORDER_OPTIONS;
+CREATE TABLE ORDER_OPTIONS (
+    id INTEGER PRIMARY KEY,
+    order_id INTEGER,
+    option_id INTEGER,
+    price INTEGER,
+    created_at INTEGER
+);
+
 ```

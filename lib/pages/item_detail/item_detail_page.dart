@@ -104,8 +104,7 @@ class ItemDetailPage extends StatelessWidget {
           //
           GestureDetector(
             onTap: () {
-              //
-              close(context);
+              saveAndClose(context);
             },
             child: Container(
               width: 500,
@@ -119,7 +118,7 @@ class ItemDetailPage extends StatelessWidget {
                 children: [
                   const Hero(
                     tag: 'cart',
-                    child: const Icon(
+                    child: Icon(
                       Icons.shopping_cart_checkout,
                       color: Colors.white,
                     ),
@@ -147,6 +146,11 @@ class ItemDetailPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void saveAndClose(BuildContext context) async {
+    await OrderController.to.addOrder();
+    close(context);
   }
 
   void close(BuildContext context) {
