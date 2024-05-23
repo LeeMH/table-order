@@ -11,7 +11,7 @@ class BottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Expanded(
+          const Expanded(
             flex: 6,
             child: Center(),
           ),
@@ -33,23 +33,23 @@ class BottomBar extends StatelessWidget {
           PageRouteBuilder(
             opaque: false, // 배경을 투명하게 설정
             pageBuilder: (BuildContext context, _, __) {
-              return HelpPage();
+              return const HelpPage();
             },
           ),
         );
       },
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         height: double.infinity,
         color: Colors.indigo.shade400,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.person_add, color: Colors.white),
+            const Icon(Icons.person_add, color: Colors.white),
             Container(
               width: 10,
             ),
-            Text("직원호출", style: TextStyle(fontSize: 20, color: Colors.white)),
+            const Text("직원호출", style: TextStyle(fontSize: 20, color: Colors.white)),
           ],
         ),
       ),
@@ -63,7 +63,7 @@ class BottomBar extends StatelessWidget {
         //
       },
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         height: double.infinity,
         color: Colors.green.shade300,
         child: Row(
@@ -75,7 +75,7 @@ class BottomBar extends StatelessWidget {
             Container(
               width: 10,
             ),
-            Text("주문내역", style: TextStyle(fontSize: 20, color: Colors.white)),
+            const Text("주문내역", style: TextStyle(fontSize: 20, color: Colors.white)),
           ],
         ),
       ),

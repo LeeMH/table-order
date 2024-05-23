@@ -39,7 +39,7 @@ class Util {
 
     // 앱 종료 코드
     // 예시: 5초 후 앱 종료
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 5), () {
       exit(1); // 앱 종료
     });
   }

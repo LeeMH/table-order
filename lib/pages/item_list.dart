@@ -62,7 +62,7 @@ class ItemList extends StatelessWidget {
             ),
           );
         },
-        child: Container(
+        child: SizedBox(
           //color: Colors.red,
           width: double.infinity,
           child: Column(
@@ -79,7 +79,7 @@ class ItemList extends StatelessWidget {
                   flex: 1,
                   child: Text(
                     item.title,
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   )),
               Expanded(
                   flex: 1, child: Text(Util.formatNumber(item.price.toInt()))),
