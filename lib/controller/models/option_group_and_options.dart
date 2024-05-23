@@ -7,10 +7,10 @@ part 'option_group_and_options.g.dart';
 @JsonSerializable()
 class OptionGroupAndPickOptions {
   OptionGroup optionGroup;
-  List<Option> pickOptions;
+  Set<Option> pickOptions;
 
   OptionGroup getOptionGroup() => optionGroup;
-  List<Option> getPickOptions() => pickOptions;
+  Set<Option> getPickOptions() => pickOptions;
 
   OptionGroupAndPickOptions({
     required this.optionGroup,

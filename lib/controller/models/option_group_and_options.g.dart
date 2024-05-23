@@ -13,12 +13,12 @@ OptionGroupAndPickOptions _$OptionGroupAndPickOptionsFromJson(
           OptionGroup.fromJson(json['optionGroup'] as Map<String, dynamic>),
       pickOptions: (json['pickOptions'] as List<dynamic>)
           .map((e) => Option.fromJson(e as Map<String, dynamic>))
-          .toList(),
+          .toSet(),
     );
 
 Map<String, dynamic> _$OptionGroupAndPickOptionsToJson(
         OptionGroupAndPickOptions instance) =>
     <String, dynamic>{
       'optionGroup': instance.optionGroup,
-      'pickOptions': instance.pickOptions,
+      'pickOptions': instance.pickOptions.toList(),
     };

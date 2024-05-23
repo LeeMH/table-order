@@ -31,11 +31,11 @@ class ItemDetailRight extends StatelessWidget {
             var options = snapshot.data?[1] as List<Option>;
 
             // 디폴트 선택 옵션 초기화
-            Map<OptionGroup, List<Option>> defaultPicked = {};
+            Map<OptionGroup, Set<Option>> defaultPicked = {};
             for (var group in optionGroups) {
               var defaultOptions = options
                   .where((o) => o.defaultPick && o.optionGroupId == group.id)
-                  .toList();
+                  .toSet();
               defaultPicked[group] = defaultOptions;
             }
             OrderController.to.initDefaultOptions(defaultPicked);

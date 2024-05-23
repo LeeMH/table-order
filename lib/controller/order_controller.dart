@@ -17,12 +17,12 @@ class OrderController extends GetxController {
   late Item _item;
 
   final _qtt = 1.obs;
-  final _pickOptions = RxMap<OptionGroup, List<Option>>({});
+  final _pickOptions = RxMap<OptionGroup, Set<Option>>({});
   final _totalPrice = 0.obs;
 
   Item getItem() => _item;
   int getQtt() => _qtt.value;
-  Map<OptionGroup, List<Option>> getPickOptions() => _pickOptions;
+  Map<OptionGroup, Set<Option>> getPickOptions() => _pickOptions;
   int getTotalPrice() => _totalPrice.value;
 
   void init(Item item) {
@@ -56,23 +56,32 @@ class OrderController extends GetxController {
     update();
   }
 
-  void initDefaultOptions(Map<OptionGroup, List<Option>> options) {
+  void initDefaultOptions(Map<OptionGroup, Set<Option>> options) {
     _pickOptions.addAll(options);
     update();
+  }
+
+  Set<Option> getOrAddPickOptions(OptionGroup optionGroup) {
+    if (!_pickOptions.containsKey(optionGroup)) {
+      _pickOptions[optionGroup] = <Option>{};
+    }
+    return _pickOptions[optionGroup]!;
   }
 
   void updateOption(OptionGroup optionGroup, Option option) async {
     var relatedOptions =
         await optionRepo.getOptionsByOptionGroupId(optionGroup.id);
-    List<Option> pickedOption = _pickOptions.putIfAbsent(optionGroup, () => []);
+    Set<Option> pickedOption = getOrAddPickOptions(optionGroup);
 
-    int pickedCount = Util.countSameElements(relatedOptions, pickedOption);
+    int pickedCount =
+        Set.from(relatedOptions).intersection(pickedOption).length;
+    print(pickedCount);
 
     if (optionGroup.minPick == 1 && optionGroup.maxPick == 1) {
       // 1개 선택인경우
       relatedOptions.where((o) => o.id != option.id).forEach((o) {
         if (pickedOption.contains(o)) {
-          _pickOptions.remove(o);
+          pickedOption.remove(o);
           _totalPrice.value -= o.price * _qtt.value;
         }
       });
@@ -107,8 +116,7 @@ class OrderController extends GetxController {
 
   Future<void> addOrder() async {
     List<OptionGroupAndPickOptions> options = [];
-
-// 반복문을 통해 추가
+    // 반복문을 통해 추가
     for (var entry in _pickOptions.entries) {
       options.add(
         OptionGroupAndPickOptions(
