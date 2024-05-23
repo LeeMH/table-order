@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:table_order/controller/models/item.dart';
 import 'package:table_order/controller/models/option.dart';
+import 'package:table_order/controller/models/option_group.dart';
+import 'package:table_order/controller/models/option_group_and_options.dart';
 
 part 'order.g.dart';
 
@@ -8,12 +10,12 @@ part 'order.g.dart';
 class Order {
   final Item item;
   int qtt;
-  List<Option> pickOptions;
+  List<OptionGroupAndPickOptions> pickOptions;
   int total;
 
   Item getItem() => item;
   int getQtt() => qtt;
-  List<Option> getPickOptions() => pickOptions;
+  List<OptionGroupAndPickOptions> getPickOptions() => pickOptions;
   int getTotal() => total;
 
   Order({

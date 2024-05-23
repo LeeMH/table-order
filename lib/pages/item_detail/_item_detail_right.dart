@@ -31,7 +31,13 @@ class ItemDetailRight extends StatelessWidget {
             var options = snapshot.data?[1] as List<Option>;
 
             // 디폴트 선택 옵션 초기화
-            var defaultPicked = options.where((o) => o.defaultPick).toList();
+            Map<OptionGroup, List<Option>> defaultPicked = {};
+            for (var group in optionGroups) {
+              var defaultOptions = options
+                  .where((o) => o.defaultPick && o.optionGroupId == group.id)
+                  .toList();
+              defaultPicked[group] = defaultOptions;
+            }
             OrderController.to.initDefaultOptions(defaultPicked);
 
             return SingleChildScrollView(
@@ -220,7 +226,7 @@ class ItemDetailRight extends StatelessWidget {
 
   Widget buildOptionButton(OptionGroup optionGroup, Option option) {
     return Obx(() {
-      bool selected = OrderController.to.isPickedOption(option);
+      bool selected = OrderController.to.isPickedOption(optionGroup, option);
       Color color = selected ? Colors.black : Colors.grey;
 
       return GestureDetector(
