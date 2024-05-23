@@ -191,23 +191,11 @@ INSERT INTO HELPS(id, title) VALUES
 DROP TABLE ORDERS;
 CREATE TABLE ORDERS (
     id INTEGER PRIMARY KEY,
-    item_id INTEGER,
-    qtt INTEGER,
-    price INTEGER,
-    total INTEGER,
+    status TEXT,
+    json_data TEXT,
     created_at INTEGER
 );
 
-#########################
-# ORDER_OPTIONS TABLE
-#########################
-DROP TABLE ORDER_OPTIONS;
-CREATE TABLE ORDER_OPTIONS (
-    id INTEGER PRIMARY KEY,
-    order_id INTEGER,
-    option_id INTEGER,
-    price INTEGER,
-    created_at INTEGER
-);
+
 
 ```
