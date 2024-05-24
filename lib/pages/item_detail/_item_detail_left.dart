@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:table_order/controller/models/item.dart';
-import 'package:table_order/util.dart';
+import 'package:table_order/util/format_util.dart';
 
 class ItemDetailLeft extends StatelessWidget {
   final Item item;
@@ -21,7 +21,7 @@ class ItemDetailLeft extends StatelessWidget {
             style: const TextStyle(fontSize: 30),
           ),
           Text(
-            Util.formatNumber(item.price.toInt()),
+            FormatUtil.formatNumber(item.price.toInt()),
             style: const TextStyle(fontSize: 20),
           )
         ],

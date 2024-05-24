@@ -5,11 +5,13 @@ import 'package:table_order/controller/models/option.dart';
 import 'package:table_order/controller/models/order.dart';
 import 'package:table_order/controller/order_controller.dart';
 import 'package:table_order/controller/repository/order_repo.dart';
-import 'package:table_order/util.dart';
+import 'package:table_order/pages/widgets/line.dart';
+import 'package:table_order/util/format_util.dart';
 
 class OrderDetailPage extends StatelessWidget {
   OrderDetailPage({super.key});
   final _orderRepo = OrderRepo();
+  final double _width = 0.7;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,8 @@ class OrderDetailPage extends StatelessWidget {
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                height: MediaQuery.of(context).size.height, // 화면 높이의 80%
-                width: MediaQuery.of(context).size.width * 0.9, // 화면 폭의 80%
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width * _width, // 화면 폭의 80%
                 color: Colors.indigo[50],
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 1.3, sigmaY: 1.3), // blur 효과
@@ -82,22 +84,57 @@ class OrderDetailPage extends StatelessWidget {
   }
 
   Widget orderTile(BuildContext context, Order order) {
-    return ListTile(
-      leading: Image.network(order.item.image),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      child: Row(
         children: [
-          Text(order.item.title),
-          Text(Util.formatNumber(order.total)),
+          Expanded(
+            flex: 3,
+            child: ClipRRect(
+              borderRadius:
+                  BorderRadius.circular(20.0), // adjust the radius as needed
+              child: Image.network(order.item.image),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            flex: 7,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(order.item.title,
+                        style: const TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold)),
+                    Text('${FormatUtil.formatNumber(order.total)} 원',
+                        style: const TextStyle(fontSize: 20)),
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    const Expanded(
+                      flex: 2,
+                      child: Text('주문수량', style: TextStyle(fontSize: 20)),
+                    ),
+                    Expanded(
+                      flex: 8,
+                      child: Text(order.qtt.toString(),
+                          style: const TextStyle(fontSize: 20)),
+                    ),
+                  ],
+                ),
+                ...buildOtionDetail(context, order),
+              ],
+            ),
+          ),
         ],
       ),
-      subtitle: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text('수량 : ${order.qtt}'),
-        ],
-      ),
-      trailing: null,
     );
   }
 
@@ -105,31 +142,47 @@ class OrderDetailPage extends StatelessWidget {
     var options = <Widget>[];
 
     for (var option in order.pickOptions) {
+      if (option.getPickOptions().isEmpty) continue;
+
       options.add(
+        Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Text('  ㄴ${option.optionGroup.title}',
+                  style: const TextStyle(fontSize: 20)),
+            ),
+            Expanded(
+              flex: 8,
+              child: Text(buildOptionValue(context, option.getPickOptions()),
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontSize: 20)),
+            ),
+          ],
+        ),
+        /*
         Column(children: [
-          Text('${option.optionGroup.title}'),
+          Text(option.optionGroup.title),
           ...buildOptionValue(context, option.getPickOptions())
         ]),
+        */
       );
     }
 
     return options;
   }
 
-  List<Widget> buildOptionValue(BuildContext context, Set<Option> options) {
-    var optionValues = <Widget>[];
+  String buildOptionValue(BuildContext context, Set<Option> options) {
+    List<String> optionValues = [];
 
     for (var option in options) {
-      optionValues.add(
-        Column(
-          children: [
-            Text('${option.title}'),
-          ],
-        ),
-      );
+      var str = option.price > 0
+          ? '${option.title} (+${option.price}원)'
+          : option.title;
+      optionValues.add(str);
     }
 
-    return optionValues;
+    return optionValues.join(', ');
   }
 
   // 상단 패널
@@ -138,72 +191,78 @@ class OrderDetailPage extends StatelessWidget {
   Widget buildBottomPanner(BuildContext context) {
     return SizedBox(
       height: 50,
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width * _width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: () {
-              close(context);
-            },
-            child: Container(
-              width: 150,
-              height: 80,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.close, color: Colors.white),
-                  Text(
-                    '닫기',
-                    style: TextStyle(fontSize: 15, color: Colors.white),
-                  )
-                ],
+          Expanded(
+            flex: 3,
+            child: GestureDetector(
+              onTap: () {
+                close(context);
+              },
+              child: Container(
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.close, color: Colors.white),
+                    Text(
+                      '닫기',
+                      style: TextStyle(fontSize: 15, color: Colors.white),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-          //
-          GestureDetector(
-            onTap: () {
-              saveAndClose(context);
-            },
-            child: Container(
-              width: 500,
-              height: 80,
-              decoration: BoxDecoration(
-                color: Colors.indigo.shade400,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Hero(
-                    tag: 'cart',
-                    child: Icon(
-                      Icons.wallet_sharp,
-                      color: Colors.white,
+          const Spacer(), //
+          Expanded(
+            flex: 6,
+            child: GestureDetector(
+              onTap: () {
+                saveAndClose(context);
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width * _width,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Colors.indigo.shade400,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Hero(
+                      tag: 'cart',
+                      child: Icon(
+                        Icons.wallet_sharp,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10.0,
-                  ),
-                  const Text(
-                    '주문',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                  const SizedBox(
-                    width: 10.0,
-                  ),
-                  Obx(
-                    () => Text(
-                      '(${Util.formatNumber(OrderController.to.getTotalPrice())}원)',
-                      style: const TextStyle(fontSize: 20, color: Colors.white),
+                    const SizedBox(
+                      width: 10.0,
                     ),
-                  ),
-                ],
+                    const Text(
+                      '주문',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    Obx(
+                      () => Text(
+                        '(${FormatUtil.formatNumber(OrderController.to.getTotalPrice())}원)',
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

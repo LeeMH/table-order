@@ -6,7 +6,7 @@ import 'package:table_order/controller/models/option_group.dart';
 import 'package:table_order/controller/option_controller.dart';
 import 'package:table_order/controller/order_controller.dart';
 import 'package:table_order/pages/widgets/line.dart';
-import 'package:table_order/util.dart';
+import 'package:table_order/util/format_util.dart';
 
 class ItemDetailRight extends StatelessWidget {
   final Item item;
@@ -258,7 +258,9 @@ class ItemDetailRight extends StatelessWidget {
               ), // 옵션 텍스트
               const SizedBox(width: 10), // 아이콘과 텍스트 사이 간격
               Text(
-                option.price > 0 ? '(+${Util.formatNumber(option.price)})' : '',
+                option.price > 0
+                    ? '(+${FormatUtil.formatNumber(option.price)})'
+                    : '',
                 style: TextStyle(
                     fontSize: 18,
                     color: color,

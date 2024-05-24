@@ -5,7 +5,7 @@ import 'package:table_order/controller/models/item.dart';
 import 'package:table_order/controller/order_controller.dart';
 import 'package:table_order/pages/item_detail/_item_detail_left.dart';
 import 'package:table_order/pages/item_detail/_item_detail_right.dart';
-import 'package:table_order/util.dart';
+import 'package:table_order/util/format_util.dart';
 
 class ItemDetailPage extends StatelessWidget {
   final Item selectedItem;
@@ -135,7 +135,7 @@ class ItemDetailPage extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      '(${Util.formatNumber(OrderController.to.getTotalPrice())}원)',
+                      '(${FormatUtil.formatNumber(OrderController.to.getTotalPrice())}원)',
                       style: const TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ),

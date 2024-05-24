@@ -6,7 +6,12 @@ import 'package:table_order/controller/repository/database.dart';
 class OrderRepo {
   Future<List<Order>> getOrders() async {
     try {
-      throw Exception('Not implemented');
+      final db = await DataBase().database;
+
+      var rows = await db.query('orders');
+      return rows
+          .map((row) => Order.fromJson(jsonDecode(row['json_data'] as String)))
+          .toList();
     } catch (e) {
       print('Error fetching orders: $e');
       return [];

@@ -4,7 +4,7 @@ import 'package:table_order/controller/group_controller.dart';
 import 'package:table_order/controller/item_controller.dart';
 import 'package:table_order/controller/models/item.dart';
 import 'package:table_order/pages/item_detail/item_detail_page.dart';
-import 'package:table_order/util.dart';
+import 'package:table_order/util/format_util.dart';
 
 class ItemList extends StatelessWidget {
   ItemList({super.key});
@@ -82,7 +82,8 @@ class ItemList extends StatelessWidget {
                     style: const TextStyle(fontSize: 20),
                   )),
               Expanded(
-                  flex: 1, child: Text(Util.formatNumber(item.price.toInt()))),
+                  flex: 1,
+                  child: Text(FormatUtil.formatNumber(item.price.toInt()))),
             ],
           ),
         ),
