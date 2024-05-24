@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_order/pages/help/help_page.dart';
+import 'package:table_order/pages/order_detail/order_detail_page.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -19,7 +20,7 @@ class BottomBar extends StatelessWidget {
           Container(
             width: 10,
           ),
-          Expanded(flex: 2, child: buildOrderListButton()), // 주문내역 버튼
+          Expanded(flex: 2, child: buildOrderListButton(context)), // 주문내역 버튼
         ],
       ),
     );
@@ -49,7 +50,8 @@ class BottomBar extends StatelessWidget {
             Container(
               width: 10,
             ),
-            const Text("직원호출", style: TextStyle(fontSize: 20, color: Colors.white)),
+            const Text("직원호출",
+                style: TextStyle(fontSize: 20, color: Colors.white)),
           ],
         ),
       ),
@@ -57,10 +59,18 @@ class BottomBar extends StatelessWidget {
     // 버튼 클릭 시 수행할 동작을 여기에 작성합니다.
   }
 
-  Widget buildOrderListButton() {
+  Widget buildOrderListButton(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            opaque: false, // 배경을 투명하게 설정
+            pageBuilder: (BuildContext context, _, __) {
+              return OrderDetailPage();
+            },
+          ),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(5),
@@ -75,7 +85,8 @@ class BottomBar extends StatelessWidget {
             Container(
               width: 10,
             ),
-            const Text("주문내역", style: TextStyle(fontSize: 20, color: Colors.white)),
+            const Text("주문내역",
+                style: TextStyle(fontSize: 20, color: Colors.white)),
           ],
         ),
       ),

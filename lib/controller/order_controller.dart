@@ -6,7 +6,6 @@ import 'package:table_order/controller/models/option_group_and_options.dart';
 import 'package:table_order/controller/models/order.dart';
 import 'package:table_order/controller/repository/option_repo.dart';
 import 'package:table_order/controller/repository/order_repo.dart';
-import 'package:table_order/util.dart';
 
 class OrderController extends GetxController {
   static OrderController get to => Get.find();
